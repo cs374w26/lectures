@@ -30,8 +30,8 @@ def get_sklearn_model_a_param(ols, df):
 def observed(n=100, c_dim=6, ols="y ~ a"):
     """
     The observed data distribution
-      C: roll a k-sided die and record the result
-      A: flip `1 + k - C` fair coins, and record 1 if at least one flip lands heads
+      C: roll a `c_dim`-sided die and record the result
+      A: flip `1 + c_dim - C` fair coins, and record 1 if at least one flip lands heads
       Y: flip `C + A` fair coins, and record the number of heads
     """
 
@@ -41,7 +41,6 @@ def observed(n=100, c_dim=6, ols="y ~ a"):
     y = np.random.binomial(n=a + c, p=0.5)
 
     df = pd.DataFrame(data=dict(c=c, a=a, y=y))
-    import pdb; pdb.set_trace()
     a_param = get_smf_model_a_param(ols, df)
 
     return a_param
@@ -50,7 +49,7 @@ def observed(n=100, c_dim=6, ols="y ~ a"):
 def randomized(n=100, c_dim=6, ols="y ~ a"):
     """
     The same distribution, except A is replaced with a fair coin f
-      C: roll a k-sided die and record the result
+      C: roll a `c_dim`-sided die and record the result
       A: flip a single fair coin, and record 1 if it lands heads
       Y: flip `C + A` fair coins, and record the number of heads
     """
